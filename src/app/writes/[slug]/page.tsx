@@ -55,35 +55,6 @@ export default function WritePost({ params }: { params: { slug: string } }) {
     if (!post) notFound();
 
     return (
-        <section className="min-h-screen pt-32 pb-24 px-6">
-            <div className="max-w-2xl mx-auto">
-                <a
-                    href="/writes"
-                    className="text-sm text-mist hover:text-accent transition-colors mb-8 inline-flex items-center gap-1 cursor-pointer"
-                >
-                    &larr; Back to writes
-                </a>
-
-                <time className="block text-sm text-mist/60 font-sans mb-4">
-                    {new Date(post.date).toLocaleDateString('en-US', {
-                        month: 'long',
-                        day: 'numeric',
-                        year: 'numeric',
-                    })}
-                </time>
-
-                <h1 className="text-4xl sm:text-5xl font-serif text-ink tracking-tight mb-8 text-wrap-balance">
-                    {post.title}
-                </h1>
-
-                <div className="space-y-6">
-                    {post.body.map((paragraph, i) => (
-                        <p key={i} className="text-lg text-mist leading-relaxed text-pretty">
-                            {paragraph}
-                        </p>
-                    ))}
-                </div>
-            </div>
-        </section>
+        <article className="subpage"><a href="/writes" className="back-link">← All notes</a><time className="article-time" dateTime={post.date}>{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time><h1>{post.title}</h1><div className="article-body">{post.body.map((paragraph, i) => <p key={i}>{paragraph}</p>)}</div></article>
     );
 }

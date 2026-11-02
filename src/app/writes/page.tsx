@@ -30,36 +30,6 @@ const posts = [
 
 export default function WritesPage() {
     return (
-        <section className="min-h-screen pt-32 pb-24 px-6">
-            <div className="max-w-2xl mx-auto">
-                <h1 className="text-4xl sm:text-6xl font-serif text-ink tracking-tight mb-4 text-wrap-balance">
-                    Writes.
-                </h1>
-                <p className="text-lg text-mist leading-relaxed mb-16 text-pretty">
-                    Short notes. Skip them if you&apos;re busy.
-                </p>
-
-                <div className="space-y-12">
-                    {posts.map((post) => (
-                        <Link key={post.slug} href={`/writes/${post.slug}`} className="group block cursor-pointer">
-                            <div className="flex items-baseline gap-4 mb-2">
-                                <time className="text-xs text-mist/50 font-sans tabular-nums shrink-0">
-                                    {new Date(post.date).toLocaleDateString('en-US', {
-                                        month: 'short',
-                                        day: 'numeric',
-                                        year: 'numeric',
-                                    })}
-                                </time>
-                            </div>
-                            <h2 className="text-2xl sm:text-3xl font-serif text-ink group-hover:text-accent transition-colors duration-300 mb-3">
-                                {post.title}
-                            </h2>
-                            <p className="text-mist leading-relaxed">{post.excerpt}</p>
-                            <div className="mt-3 h-px bg-border" />
-                        </Link>
-                    ))}
-                </div>
-            </div>
-        </section>
+        <section className="subpage"><p className="section-label">Thoughts along the way</p><h1>Notes.</h1><p className="intro">Short notes on making things and paying attention.</p><div className="note-list">{posts.map(post => <Link key={post.slug} href={`/writes/${post.slug}`} className="note-item"><time dateTime={post.date}>{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time><h2>{post.title}</h2><p>{post.excerpt}</p></Link>)}</div></section>
     );
 }

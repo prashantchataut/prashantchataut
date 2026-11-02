@@ -3,7 +3,6 @@ import { Sora, Libre_Baskerville, Noto_Sans_Devanagari } from 'next/font/google'
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import ThemeProvider from '@/components/providers/ThemeProvider';
 
 const sora = Sora({
     subsets: ['latin'],
@@ -113,15 +112,13 @@ export default function RootLayout({
             <head>
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             </head>
-            <body className="bg-sand text-ink antialiased selection:bg-accent/30 selection:text-ink font-sans">
+            <body className="antialiased">
                 <a href="#main-content" className="skip-to-content">Skip to content</a>
-                <ThemeProvider>
                     <Header />
                     <main id="main-content" className="relative z-10 min-h-screen">
                         {children}
                     </main>
                     <Footer />
-                </ThemeProvider>
             </body>
         </html>
     );
