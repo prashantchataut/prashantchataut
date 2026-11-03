@@ -1,35 +1,41 @@
-# Prashant Chataut
+# Hi, I'm Prashant.
 
-I make apps, write, and follow ideas from Nepal.
-
-![An illustrated desk and a path through terraced hills](https://raw.githubusercontent.com/prashantchataut/prashantchataut/main/public/images/hero-day.svg)
+Developer from Nepal. I make apps to solve things that matter to me.
 
 [Portfolio](https://knowprashant.vercel.app) · [Writing](https://knowprashant.vercel.app/writes) · [Email](mailto:prashantchataut8@gmail.com)
 
-## How I started
+## Selected work
 
-In grade 10, I found Cursor and started experimenting with an app called Labelwise, also known as IngredAI. It was meant to help people understand the ingredients on everyday product labels. Since then, I’ve worked on tools for students, an app for discovering words, and a Game Boy Advance emulator.
+### [NEBians](https://nebians.consica.com.np/) · Education & community
 
-## What I’m building
+Study notes, past papers, exam updates and a forum for students and teachers. Available on the web and Android.
 
-### [NEBians](https://nebians.consica.com.np/)
+**Kotlin · Jetpack Compose · Django**
 
-Study notes, past papers, exam updates, and conversations for students and teachers. Available on the web and Android.
+### [Kairos](https://github.com/prashantchataut/Kairos) · Words & discovery
 
-### [Kairos](https://github.com/prashantchataut/Kairos)
+A place for words, idioms, thoughts and letters to your future self. Its feed adapts to saved and skipped items, and spaced repetition schedules word practice. Kairos grew out of NeverZero and Prody.
 
-A place to discover vocabulary, idioms, thoughts, quotes, and affirmations, and to write letters to a future self. It began as NeverZero, a productivity app, and was later called Prody.
+**Kotlin · Jetpack Compose · Room · WorkManager**
 
-### [Retra](https://github.com/prashantchataut/Retra)
+### [Retra](https://github.com/prashantchataut/Retra) · Games & emulation
 
-An Android Game Boy Advance emulator with its own engine, a patcher, and an original game called Mochi Hop. Built for homebrew and games you own.
+An Android Game Boy Advance emulator with its own C++ core, a patcher, and an original game called Mochi Hop. Built for homebrew and games you own.
 
-## Away from the code
+**Kotlin · Jetpack Compose · C++17 · JNI**
 
-I also write. You can read [Grace](https://knowprashant.vercel.app/writes/grace), a poem, or [the story of my first projects](https://knowprashant.vercel.app/writes/where-the-first-idea-led).
+### [Glamo Nepal](https://www.glamonepal.com/) · Client work
 
-## A year in contributions
+I built the ecommerce site, native point of sale, and admin system. The POS API is designed to share catalog data and support offline sales sync.
+
+**Next.js · TypeScript · Hono · Cloudflare Workers**
+
+## Writing
+
+[Grace](https://knowprashant.vercel.app/writes/grace) · [Where the first idea led](https://knowprashant.vercel.app/writes/where-the-first-idea-led)
+
+## Contributions
 
 ![A garden representing Prashant's GitHub contributions](https://sakura-garden.vercel.app/api/svg?username=prashantchataut&theme=auto-green&animate=false)
 
-[Say hello](mailto:prashantchataut8@gmail.com) · [Instagram](https://instagram.com/prashantchataut_)
+[GitHub](https://github.com/prashantchataut) · [Instagram](https://instagram.com/prashantchataut_)

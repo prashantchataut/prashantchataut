@@ -1,7 +1,7 @@
 export const posts = [
     {
         slug: 'grace', title: 'Grace', kind: 'Poem', theme: 'grace',
-        excerpt: 'A poem about what remains, and what might have been.',
+        excerpt: 'A poem about loss and what comes after.',
         body: [
             'Beyong the shaking storm,\nthe world collapsed,\nsoldiers fought their toughest battles,\nsought treaty,\nsought relief,\nsought end.',
             'stillness,\nstillness in bodies that bid farewell,\nshallowness,\nshallowness in bodies that had “life”.',

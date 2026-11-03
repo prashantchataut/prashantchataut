@@ -1,8 +1,9 @@
 # Adding writing
 
-Every new piece deserves its own reading experience, not just a new cover.
+When Prashant asks to add a piece, make the whole reading experience without waiting for a second request.
 
-1. Add the piece and its metadata to `src/data/posts.ts`. Preserve poems and supplied prose exactly unless Prashant requests changes.
-2. Choose a visual idea drawn from the piece. Create original day and night cover art, and add corresponding styles for the index and reading header. Avoid text in the image. Night artwork should be designed for night, not simply inverted.
-3. Give the title, reading passages, and pointer atmosphere a distinct, restrained treatment related to that idea. Extend `ReadingAtmosphere` for the piece's particle shape, color, and movement. Keep text readable without motion and disable decorative effects for reduced motion and coarse pointers.
-4. Check keyboard navigation, contrast, small screens, theme persistence, and both themes. Preview the complete reading experience, not only the cover. Avoid em dashes and generic filler in site copy. Never invent personal details.
+1. Preserve supplied writing exactly unless asked to edit it. Add the piece and metadata to `src/data/posts.ts`.
+2. Read the piece and choose a specific visual and motion idea from it. Make a distinct cover in both themes and a reading environment that belongs to this piece, not a stock image or the same generic effect with another color.
+3. Add purposeful in-page motion. Extend `ReadingAtmosphere` with a suitable particle shape, movement, and, where meaningful, interaction with the actual text. Its existing petal collision code uses text-line rectangles and can be adapted. Make pointer interaction optional; the experience should also work without a mouse.
+4. Respect reduced motion and readable contrast. Do not cover the text or interfere with selection, touch, navigation, or screen readers. Bound particle counts and clean up animation frames and listeners.
+5. Preview desktop and mobile in both themes, test the full reading page, scrolling, keyboard navigation and theme persistence. Avoid em dashes, filler, and invented personal details. Keep custom art intentional and editable.

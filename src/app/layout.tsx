@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     metadataBase: new URL('https://knowprashant.vercel.app'),
     title: 'Prashant Chataut',
     description:
-        'Prashant Chataut builds NEBians, Kairos, and Retra from Nepal. Study apps, a GBA emulator, and quiet journaling.',
+        'Prashant Chataut builds NEBians, Kairos, and Retra from Nepal. Apps, client work, and writing from Nepal.',
     keywords: [
         'Prashant Chataut',
         'NEBians',
@@ -40,10 +40,10 @@ export const metadata: Metadata = {
     ],
     authors: [{ name: 'Prashant Chataut' }],
     creator: 'Prashant Chataut',
-    icons: { icon: '/favicon.svg' },
+    icons: { icon: '/favicon-pixel.svg' },
     openGraph: {
         title: 'Prashant Chataut',
-        description: 'Builds NEBians, Kairos, and Retra. Apps for learning, words, and play.',
+        description: 'Builds apps and writes from Nepal.',
         url: 'https://knowprashant.vercel.app',
         siteName: 'Prashant Chataut',
         type: 'website',
