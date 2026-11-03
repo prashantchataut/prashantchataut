@@ -5,7 +5,7 @@ export default function Footer() {
         <footer id="contact" className="site-footer">
             <div className="footer-inner">
                 <h2>Have something<br />{" "}in mind?</h2>
-                <p className="footer-description">Questions, ideas, or just a hello—my inbox is open.</p>
+                <p className="footer-description">Questions, ideas, or just a hello. My inbox is open.</p>
                 <a className="footer-email" href={site.links.email}>prashantchataut8@gmail.com <span aria-hidden="true">↗</span></a>
                 <div className="footer-bottom">
                     <p>© {new Date().getFullYear()} Prashant Chataut<br /><span></span></p>

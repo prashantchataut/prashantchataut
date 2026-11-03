@@ -274,3 +274,85 @@ body:has(.reading-page) .header-contact { background: var(--paper); }
 @keyframes path-breathe { from { transform: scale(1.02) translateY(3px); } to { transform: scale(1.05) translateY(-3px); } }
 
 .mark { width: 24px; height: 24px; color: #365a48; }
+
+/* A garden of type, not an icon beside the name. */
+.garden-name { display:flex; flex-wrap:wrap; justify-content:center; column-gap:.24em; }
+.garden-word { display:inline-flex; white-space:nowrap; }
+.garden-letter { display:inline-block; position:relative; animation:letter-grow .9s cubic-bezier(.2,.8,.2,1) both; animation-delay:calc(var(--i) * 45ms); }
+.letter-flower { position:absolute; left:46%; top:-.13em; width:.13em; height:.13em; border-radius:50%; background:#d99183; box-shadow: -.09em 0 #e6b7aa, .09em 0 #e6b7aa, 0 -.09em #e6b7aa, 0 .09em #e6b7aa; opacity:0; transform:scale(.1) rotate(0); transition:opacity .35s,transform .5s; pointer-events:none; }
+.garden-letter:nth-child(3n+1) .letter-flower { animation:blossom 5s calc(var(--i) * 110ms + .9s) ease-in-out infinite; }
+.garden-letter:hover .letter-flower { opacity:1; transform:scale(1) rotate(45deg); }
+.garden-letter:hover { color:#355e49; }
+@keyframes letter-grow { from {opacity:0; transform:translateY(.2em) rotate(-3deg)} to {opacity:1;transform:none} }
+@keyframes blossom { 0%,18%,100%{opacity:0;transform:scale(.1) rotate(0)} 35%,65%{opacity:.95;transform:scale(1) rotate(35deg)} }
+@supports (animation-timeline:view()) { @media(prefers-reduced-motion:no-preference) { .name-garden {animation: name-sway linear both;animation-timeline:view();animation-range:entry 0% exit 100%;} } }
+@keyframes name-sway { from{transform:translateY(8px)} to{transform:translateY(-8px)} }
+.cursor-garden.active .cursor-butterfly {opacity:1}
+.cursor-butterfly svg {width:var(--size);height:auto;fill:#f8eed7;color:#345748}
+.cursor-butterfly .wing {animation-duration:var(--beat)}
+body:has(.reading-page) .cursor-garden {display:none}
+.hero-art {background-image:url('/images/hero-day.svg');background-position:center;clip-path:none;border-radius:4px}
+.theme-toggle {display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:74px;min-height:44px;padding:6px 12px;border:1px solid currentColor;border-radius:30px;background:transparent;color:inherit;font:inherit;font-size:18px;cursor:pointer}
+.theme-label {font-size:12px;font-weight:600}
+.portrait-pair {display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center}
+.portrait-pair figure {margin:0;max-width:none;padding:10px;background:#e5eadb}
+.portrait-pair img {display:block;width:100%;height:auto}
+.portrait-pair figcaption {font-size:12px;padding:8px 2px 0;color:var(--muted)}
+.portrait-pair figure:nth-child(2) {transform:translateY(30px)}
+.reading-passage {position:relative}
+.passage-mark {position:absolute;right:calc(100% + 25px);font-family:Georgia,serif;font-size:15px;opacity:.4}
+.reading-progress {position:fixed;z-index:101;inset:0 0 auto;height:3px;pointer-events:none}
+.reading-progress div {height:100%;background:#91a77b;transform-origin:left;transform:scaleX(0)}
+.reading-atmosphere {position:fixed;inset:0;pointer-events:none;z-index:99;overflow:hidden}
+.reading-particle {position:absolute;display:block;width:5px;height:5px;opacity:0;background:#9dbcc1;animation:particle-fall 1.7s ease-out forwards}
+.atmosphere-grace .reading-particle {width:3px;height:12px;border-radius:100%;transform:rotate(22deg)}
+.atmosphere-journey .reading-particle {border-radius:50%;background:#d7a65b;box-shadow:0 0 8px #e4b775}
+@keyframes particle-fall {0%{opacity:0;transform:translate(0,0) rotate(0)}20%{opacity:.65}100%{opacity:0;transform:translate(var(--drift),38px) rotate(var(--turn))}}
+.reading-grace .reading-title {animation:grace-title 1.5s ease-out both}
+.reading-journey .reading-title {animation:journey-title 1.15s ease-out both}
+@keyframes grace-title {from {opacity:0;filter:blur(7px);transform:translateY(8px)} to {opacity:1;filter:blur(0);transform:none}}
+@keyframes journey-title {from {opacity:0;transform:translateX(-20px)} to {opacity:1;transform:none}}
+.reading-end-mark {font-size:30px;color:#789478;padding-bottom:25px}
+@supports (animation-timeline:view()) { @media(prefers-reduced-motion:no-preference) { .reading-passage {animation:passage-in linear both;animation-timeline:view();animation-range:entry 0% entry 22%} } }
+@keyframes passage-in {from{transform:translateY(8px)}to{transform:none}}
+
+/* Night is a distinct palette, with new artwork rather than inverted images. */
+html[data-theme="dark"] {--paper:#111e20;--ink:#e7e6d8;--muted:#b8c8c1;--blue:#1a3035;--line:#3e5653;--cream:#283b36;--sand:#111e20;--mist:#b8c8c1;--accent:#b9d6be;--surface:#1b2c2c;--surface-elevated:#263a37;--border:#3e5653}
+html[data-theme="dark"] .hero {background:radial-gradient(ellipse at 50% 5%,#304c4c,#1a3035 70%)}
+html[data-theme="dark"] .hero-art {background-image:url('/images/hero-night.svg')}
+html[data-theme="dark"] .project-copy {background:#223632}
+html[data-theme="dark"] .project-kairos .project-copy {background:#2a3444}
+html[data-theme="dark"] .project-retra .project-copy {background:#3b3529}
+html[data-theme="dark"] .nebians-visual {background:#3a5a66;color:#f1eadb}
+html[data-theme="dark"] .kairos-visual {background:#485879;color:#f4efe5}
+html[data-theme="dark"] .retra-visual {background:#76613d;color:#fff6e8}
+html[data-theme="dark"] .button-dark {background:#e1e9d8;color:#152c29}
+html[data-theme="dark"] .button-dark:hover {background:#bcd2b8}
+html[data-theme="dark"] .site-footer {background:#0a1516;color:#e7e6d8}
+html[data-theme="dark"] .portrait-pair figure {background:#2a3c35}
+html[data-theme="dark"] .reading-grace .reading-header, html[data-theme="dark"] .writing-entry-grace {background:#102226;color:#f1efe0}
+html[data-theme="dark"] .reading-journey .reading-header, html[data-theme="dark"] .writing-entry-journey {background:#1b2925;color:#f1efe0}
+html[data-theme="dark"] .writing-entry-grace::before,html[data-theme="dark"] .reading-grace .reading-header::before {background-image:linear-gradient(90deg,#102226 3%,#102226dc 36%,transparent 82%),url('/images/grace-night.svg')}
+html[data-theme="dark"] .writing-entry-journey::before,html[data-theme="dark"] .reading-journey .reading-header::before {background-image:linear-gradient(90deg,#1b2925 3%,#1b2925dd 36%,transparent 82%),url('/images/journey-night.svg')}
+html[data-theme="dark"] .garden-letter:hover {color:#d5e8b7}
+@media(max-width:700px){.header-inner{gap:8px}.wordmark{font-size:12px}.main-nav{gap:12px;font-size:12px}.theme-toggle{min-width:44px;padding:5px;font-size:18px}.theme-label{display:none}.hero-art{height:280px}.portrait-pair{width:100%;max-width:430px}.passage-mark{position:static;display:block;margin-bottom:8px}.reading-header h1{max-width:100%}html[data-theme="dark"] .writing-entry-grace::before,html[data-theme="dark"] .reading-grace .reading-header::before{background-image:linear-gradient(90deg,#102226f5 0%,#102226bc 60%,#10222644),url('/images/grace-night.svg')}html[data-theme="dark"] .writing-entry-journey::before,html[data-theme="dark"] .reading-journey .reading-header::before{background-image:linear-gradient(90deg,#1b2925f5 0%,#1b2925bc 60%,#1b292544),url('/images/journey-night.svg')}}
+@media(prefers-reduced-motion:reduce){.garden-letter,.letter-flower,.name-garden,.reading-title,.reading-passage,.reading-particle{animation:none!important}.garden-letter{opacity:1}.reading-atmosphere{display:none}}
+
+/* Keep body copy fully legible throughout scroll reveals. */
+.passage-mark {font-size:0;width:14px;height:14px;border:1px solid currentColor;transform:rotate(45deg);top:.6em}
+.reading-journey .passage-mark {width:9px;height:9px;border-radius:50%;background:currentColor;transform:none}
+.reading-end-mark {font-size:0;width:20px;height:20px;border:1px solid #789478;transform:rotate(45deg);margin:10px 0 30px;padding:0}
+.garden-letter:nth-child(odd) .letter-flower {width:.15em;height:.15em;animation:blossom 7s calc(var(--i) * 100ms + .5s) ease-in-out infinite}
+@media(max-width:700px){.passage-mark{position:static;margin:0 0 20px 4px}}
+.reading-vignette {margin:48px 0 12px;overflow:hidden;background:#e9e8dd}
+.reading-vignette img {display:block;width:100%;height:auto}
+html[data-theme="dark"] .reading-vignette {border:8px solid #263b36;background:#263b36}
+/* Tiny stems and blossoms grow from the letterforms themselves. */
+.garden-letter:nth-child(4n+2)::after {content:'';position:absolute;width:.07em;height:.27em;bottom:.02em;right:.03em;border-right:1.5px solid #739877;border-radius:50%;transform:rotate(30deg);pointer-events:none}
+.garden-letter:nth-child(4n+2)::before {content:'';position:absolute;right:-.02em;bottom:.19em;width:.13em;height:.07em;background:#82a987;border-radius:100% 0 100% 0;transform:rotate(-35deg);pointer-events:none}
+.garden-letter:nth-child(3n+1) .letter-flower,.garden-letter:nth-child(odd) .letter-flower {animation:bloom-breathe 6s calc(var(--i) * 120ms) ease-in-out infinite alternate}
+@keyframes bloom-breathe {0%{opacity:.7;transform:scale(.65) rotate(0)}100%{opacity:1;transform:scale(1) rotate(35deg)}}
+@media(prefers-reduced-motion:reduce){.garden-letter:nth-child(3n+1) .letter-flower,.garden-letter:nth-child(odd) .letter-flower{animation:none;opacity:.8;transform:scale(.8)}}
+.reading-vignette .vignette-night {display:none}
+html[data-theme="dark"] .reading-vignette .vignette-day {display:none}
+html[data-theme="dark"] .reading-vignette .vignette-night {display:block}

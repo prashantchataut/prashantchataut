@@ -109,8 +109,9 @@ export default function RootLayout({
     };
 
     return (
-        <html lang="en" className={`${sora.variable} ${libreBaskerville.variable} ${notoDevanagari.variable}`}>
+        <html lang="en" suppressHydrationWarning className={`${sora.variable} ${libreBaskerville.variable} ${notoDevanagari.variable}`}>
             <head>
+                <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem("theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}})()` }} />
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             </head>
             <body className="antialiased">
