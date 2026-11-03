@@ -76,7 +76,7 @@ export const retra = {
     name: "Retra",
     tagline: "GBA games on your phone.",
     description:
-        "Android emulator for Game Boy Advance. FireRed, Heart & Soul, Ash Gray, that whole era. Kotlin, Compose, mGBA. Still building it.",
+        "Android emulator for Game Boy Advance. FireRed, Heart & Soul, Ash Gray, that whole era. Kotlin, Compose, and a custom emulation core. Still building it.",
     status: "In development",
     features: [
         "Map a real gamepad per game and test inputs live",

@@ -1,24 +1,18 @@
 # Prashant Chataut
 
-> Prashant Chataut builds apps from Nepal: NEBians (study platform), Retra (Android GBA emulator), and Prody (journaling without streaks).
-
-## About
-
-- [About](https://knowprashant.vercel.app/#about): Mobile and web apps. Design, code, ship.
+Prashant is a developer in Nepal who builds apps for learning, play, and reflection.
 
 ## Projects
 
-- [NEBians](https://nebians.consica.com.np/): Notes, past papers, forums for students and teachers. [Google Play](https://play.google.com/store/apps/details?id=com.neb.ians). Instagram: [@the_nebians](https://www.instagram.com/the_nebians).
-- [Retra](https://github.com/prashantchataut/Retra): Android GBA emulator. In development.
-- [Prody](https://github.com/prashantchataut/Prody): Journaling and reflection without streak guilt.
+- [NEBians](https://nebians.consica.com.np/): Study resources, exam updates, and a forum for students and teachers, on the web and Android. [Google Play](https://play.google.com/store/apps/details?id=com.neb.ians).
+- [Retra](https://github.com/prashantchataut/Retra): An Android Game Boy Advance emulator with a custom engine, patcher, and original game, Mochi Hop.
+- [Prody](https://github.com/prashantchataut/Prody): A journaling and reflection app without streaks.
 
-## Contact
+## More
 
-- GitHub: https://github.com/prashantchataut
-- Instagram: https://instagram.com/prashantchataut_
-- Email: prashantchataut8@gmail.com
-
-## Optional
-
+- [About](https://knowprashant.vercel.app/#about)
+- [Notes](https://knowprashant.vercel.app/writes)
 - [Now](https://knowprashant.vercel.app/now)
-- [Writes](https://knowprashant.vercel.app/writes)
+- [GitHub](https://github.com/prashantchataut)
+- [Instagram](https://instagram.com/prashantchataut_)
+- Email: prashantchataut8@gmail.com

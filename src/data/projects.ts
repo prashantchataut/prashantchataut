@@ -46,7 +46,7 @@ export const projects: Project[] = [
         name: "Retra",
         tagline: "GBA games on your phone.",
         description:
-            "Android GBA emulator. FireRed, Heart & Soul, Ash Gray. Kotlin, Compose, mGBA. Still in development.",
+            "Android GBA emulator. FireRed, Heart & Soul, Ash Gray. Kotlin, Compose, and a custom emulation core. Still in development.",
         status: "in-progress",
         featured: true,
         links: {

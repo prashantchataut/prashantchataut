@@ -1,5 +1,4 @@
-import { siteConfig } from '@/data/config';
-export const metadata = { title: 'Now - Prashant Chataut', description: 'What I’m working on right now.', alternates: { canonical: 'https://knowprashant.vercel.app/now' } };
+export const metadata = { title: 'Now - Prashant Chataut', description: 'A snapshot of what Prashant was working on in July 2026.', alternates: { canonical: 'https://knowprashant.vercel.app/now' } };
 export default function NowPage() {
-    return <section className="subpage"><p className="section-label">A little update</p><h1>Right now.</h1><p className="intro">A look at the things on my mind and in the works.</p><div className="article-body">{siteConfig.now.map((paragraph, i) => <p key={i}>{paragraph}</p>)}<p>Last updated: July 2026</p></div></section>;
+    return <section className="subpage"><h1>What I’m working on.</h1><p className="intro">A snapshot from July 2026.</p><div className="article-body"><p>NEBians is live on the web and Google Play. I’m working on the in-app helper, forum, and downloads, and listening to what students need.</p><p>Retra is in progress on GitHub, with work around controllers, saved games, and performance.</p><p>Prody is a quieter journaling project I return to when I can. I’m also reading about how people form habits without turning them into pressure.</p></div></section>;
 }
