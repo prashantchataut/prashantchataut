@@ -1,18 +1,12 @@
 # Prashant Chataut
 
-Prashant is a developer in Nepal who builds apps for learning, play, and reflection.
+Prashant builds apps and writes from Nepal.
 
 ## Projects
+- [NEBians](https://nebians.consica.com.np/): Study resources and conversations for students and teachers.
+- [Kairos](https://github.com/prashantchataut/Kairos): Words, thoughts, affirmations, and letters to a future self.
+- [Retra](https://github.com/prashantchataut/Retra): An Android Game Boy Advance emulator with its own engine, patcher, and original game.
 
-- [NEBians](https://nebians.consica.com.np/): Study resources, exam updates, and a forum for students and teachers, on the web and Android. [Google Play](https://play.google.com/store/apps/details?id=com.neb.ians).
-- [Retra](https://github.com/prashantchataut/Retra): An Android Game Boy Advance emulator with a custom engine, patcher, and original game, Mochi Hop.
-- [Prody](https://github.com/prashantchataut/Prody): A journaling and reflection app without streaks.
-
-## More
-
-- [About](https://knowprashant.vercel.app/#about)
-- [Notes](https://knowprashant.vercel.app/writes)
-- [Now](https://knowprashant.vercel.app/now)
-- [GitHub](https://github.com/prashantchataut)
-- [Instagram](https://instagram.com/prashantchataut_)
-- Email: prashantchataut8@gmail.com
+## Writing
+- [Grace](https://knowprashant.vercel.app/writes/grace): A poem.
+- [Where the first idea led](https://knowprashant.vercel.app/writes/where-the-first-idea-led): The story of the projects.

@@ -10,6 +10,9 @@ const nextConfig = {
             },
         ],
     },
+    async redirects() {
+        return ['honestly-blogs-are-boring', 'software-should-shut-up', 'building-nebians'].map(slug => ({ source: `/writes/${slug}`, destination: '/writes', permanent: true }));
+    },
     async headers() {
         return [
             {

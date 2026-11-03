@@ -124,3 +124,153 @@ h1,h2,h3 { font-family:var(--font-serif),Georgia,serif; font-weight:400; letter-
     .tools-strip { display: block; padding-bottom: 60px; }
     .tools-strip p:first-child { margin-bottom: 12px; }
 }
+
+/* The garden is a reading atmosphere: motion never carries meaning alone. */
+.name-garden { position: relative; display: inline-block; max-width: 100%; }
+.name-garden h1 { font-size: clamp(54px, 7.6vw, 108px); line-height: 1.08; }
+.name-period { color: #4a895f; }
+.hero-butterflies { position: absolute; inset: -35px -55px; pointer-events: none; }
+.butterfly { position: absolute; width: 27px; color: #365a48; fill: #f8f8f3; overflow: visible; }
+.butterfly-one { left: 1%; top: 2%; animation: float-one 13s ease-in-out infinite; }
+.butterfly-two { right: 1%; top: 4%; width: 23px; animation: float-two 16s ease-in-out infinite; }
+.butterfly-three { right: 20%; bottom: -10%; width: 15px; opacity: .7; animation: float-one 19s ease-in-out infinite reverse; }
+.wing { transform-origin: 18px 15px; animation: wingbeat 1.3s ease-in-out infinite alternate; }
+.wing-right { animation-delay: -.65s; }
+.cursor-garden { position: fixed; inset: 0; pointer-events: none; z-index: 99; }
+.cursor-butterfly { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity .3s ease; will-change: transform; }
+.cursor-butterfly svg { width: 18px; fill: #f8f8f3; color: #365a48; }
+.cursor-butterfly-two svg { width: 13px; fill: #f6d8b9; }
+@keyframes wingbeat { from { transform: scaleX(.5); } to { transform: scaleX(1); } }
+@keyframes float-one { 0%,100% { transform: translate(0,0) rotate(-12deg); } 50% { transform: translate(24px,-20px) rotate(12deg); } }
+@keyframes float-two { 0%,100% { transform: translate(0,0) rotate(14deg); } 50% { transform: translate(-24px,-15px) rotate(-10deg); } }
+.avatar-portrait { background: #e9eedc; padding: 15px; }
+.avatar-portrait img { filter: none; }
+.project-kairos .project-copy { background: #eef0fa; }
+.kairos-visual { background: #b9cbed; }
+.kairos-phone-one { left: 22%; top: 20%; transform: rotate(-7deg); }
+.kairos-phone-two { left: 50%; top: 27%; transform: rotate(8deg); }
+.film-section { display: grid; grid-template-columns: .7fr 1.3fr; gap: 56px; align-items: center; padding: 72px 0 10px; }
+.film-section h3 { font-size: clamp(34px, 3.2vw, 48px); line-height: 1.15; }
+.film-section p { color: var(--muted); line-height: 1.7; margin-top: 20px; max-width: 330px; }
+.film-section .text-link { margin-top: 18px; }
+.film-section iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; background: #dbe5f2; }
+.writing-index { padding-top: 170px; padding-bottom: 120px; }
+.writing-intro { max-width: 900px; margin: 0 auto 70px; }
+.writing-intro h1 { font-size: clamp(56px, 7vw, 92px); line-height: 1.05; letter-spacing: -.04em; }
+.writing-intro p { color: var(--muted); font-size: 18px; line-height: 1.7; margin-top: 22px; }
+.writing-collection { max-width: 900px; margin: auto; display: grid; gap: 22px; }
+.writing-entry { position: relative; display: block; overflow: hidden; min-height: 290px; padding: 42px; isolation: isolate; }
+.writing-entry-grace { background: #c6d8dc; color: #18363d; }
+.writing-entry-journey { background: #e5ecd9; color: #253b31; }
+.writing-entry-copy { position: relative; z-index: 1; max-width: 55%; }
+.writing-entry-copy > p:first-child { font-size: 14px; }
+.writing-entry h2 { font-size: clamp(42px, 4vw, 64px); line-height: 1.12; letter-spacing: -.04em; margin: 35px 0 15px; }
+.writing-entry-copy p { line-height: 1.6; }
+.writing-entry-copy > span { display: inline-block; font-size: 14px; font-weight: 600; margin-top: 26px; }
+.writing-entry:hover h2 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 7px; }
+.writing-art { position: absolute; pointer-events: none; }
+.writing-entry .writing-art { width: 40%; height: 85%; right: 2%; top: 8%; }
+.writing-art-grace { color: #62858b; }
+.writing-art-journey { color: #799b78; }
+.writing-entry:hover .writing-art-journey { transform: translateY(-5px); }
+.writing-art-journey { transition: transform 800ms ease; }
+.reading-header { padding: 145px 32px 0; overflow: hidden; }
+.reading-grace .reading-header { background: #c6d8dc; color: #18363d; }
+.reading-journey .reading-header { background: #e5ecd9; color: #253b31; }
+.reading-header-inner { position: relative; max-width: 900px; min-height: 335px; margin: auto; padding-bottom: 58px; }
+.reading-header .back-link { position: relative; z-index: 1; }
+.reading-header h1 { position: relative; z-index: 1; font-size: clamp(64px, 8vw, 112px); line-height: 1.07; max-width: 75%; letter-spacing: -.04em; }
+.reading-kind { position: relative; z-index: 1; font-size: 14px; margin: 16px 0; }
+.reading-byline { position: relative; z-index: 1; margin-top: 22px; font-size: 14px; }
+.reading-header .writing-art { right: 0; bottom: 0; width: min(40%, 340px); height: 260px; opacity: .75; }
+.reading-grace .writing-art { animation: grace-drift 10s ease-in-out infinite alternate; }
+.reading-journey .writing-art path:first-child { stroke-dashoffset: 0; animation: path-drift 14s linear infinite; }
+@keyframes grace-drift { from { transform: translateX(-8px); } to { transform: translateX(8px); } }
+@keyframes path-drift { to { stroke-dashoffset: -52; } }
+.reading-body { max-width: 740px; margin: 0 auto; padding: 80px 32px 50px; display: grid; gap: 28px; font-size: 18px; line-height: 1.85; color: var(--muted); }
+.poem-body { max-width: 740px; font-family: var(--font-serif), Georgia, serif; color: var(--ink); font-size: clamp(18px, 2vw, 22px); line-height: 1.9; gap: 42px; }
+.poem-body p { white-space: pre-line; }
+.reading-end { max-width: 740px; margin: 0 auto; padding: 0 32px 100px; }
+@media (max-width: 700px) {
+    .name-garden h1 { font-size: clamp(45px, 10vw, 67px); }
+    .hero-butterflies { inset: -25px -8px; }
+    .butterfly-one { left: 4%; top: -16%; }
+    .butterfly-two { right: 4%; top: -13%; }
+    .cursor-garden { display: none; }
+    .project-kairos .project-copy { order: 1; }
+    .project-kairos .project-visual { order: 2; }
+    .project-retra .project-copy { order: 1; }
+    .project-retra .project-visual { order: 2; }
+    .film-section { grid-template-columns: 1fr; gap: 24px; padding-top: 50px; }
+    .writing-index { padding-top: 130px; padding-bottom: 80px; }
+    .writing-intro { margin-bottom: 45px; }
+    .writing-entry { padding: 28px; min-height: 300px; }
+    .writing-entry-copy { max-width: 75%; }
+    .writing-entry h2 { margin-top: 45px; }
+    .writing-entry .writing-art { width: 50%; height: 65%; right: -10%; top: 15%; opacity: .45; }
+    .reading-header { padding: 130px 20px 0; }
+    .reading-header-inner { min-height: 310px; padding-bottom: 45px; }
+    .reading-header h1 { max-width: 90%; font-size: clamp(54px, 12vw, 80px); }
+    .reading-header .writing-art { right: -20%; width: 55%; opacity: .35; }
+    .reading-body { padding: 55px 20px 40px; }
+    .reading-end { padding: 0 20px 75px; }
+}
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .writing-entry .writing-art { animation: garden-scroll linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
+    }
+}
+@keyframes garden-scroll { from { transform: translateY(18px); } to { transform: translateY(-18px); } }
+@media (prefers-reduced-motion: reduce) {
+    .butterfly, .wing, .reading-grace .writing-art, .reading-journey .writing-art path:first-child { animation: none; }
+    .writing-art-journey { transition: none; }
+    .cursor-garden { display: none; }
+}
+/* Illustrated reading landscapes keep each piece in its own world. */
+.name-vine { position: absolute; left: 10%; width: 80%; height: 22px; bottom: 4px; color: #739b79; opacity: .65; }
+.name-vine path { stroke-dasharray: 730; animation: vine-draw 12s ease-in-out infinite alternate; }
+@keyframes vine-draw { from { stroke-dashoffset: 500; } to { stroke-dashoffset: 0; } }
+.writing-entry::before { content: ''; position: absolute; inset: 0; z-index: -1; background-size: cover; background-position: center; }
+.writing-entry-grace::before { background-image: linear-gradient(90deg, #d0dce0 4%, #d0dce0d9 38%, transparent 75%), url('/images/grace-scene.svg'); }
+.writing-entry-journey::before { background-image: linear-gradient(90deg, #e8eddc 4%, #e8eddcd9 38%, transparent 75%), url('/images/journey-scene.svg'); }
+.writing-entry .writing-art { display: none; }
+.reading-header { position: relative; isolation: isolate; }
+.reading-header::before { content: ''; position: absolute; inset: 0; z-index: -1; background-size: cover; background-position: center; }
+.reading-grace .reading-header::before { background-image: linear-gradient(90deg, #d0dce0 4%, #d0dce0dc 35%, transparent 78%), url('/images/grace-scene.svg'); }
+.reading-journey .reading-header::before { background-image: linear-gradient(90deg, #e8eddc 4%, #e8eddcdc 35%, transparent 78%), url('/images/journey-scene.svg'); }
+.reading-header .writing-art { display: none; }
+.film-section iframe { background: #dbe5f2 url('/images/kairos-film.svg') center / cover no-repeat; }
+.home-writing { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; padding-top: 10px; padding-bottom: 110px; }
+.home-writing h2 { font-size: clamp(40px, 5vw, 68px); line-height: 1.1; letter-spacing: -.04em; }
+.home-writing > div > p { max-width: 360px; margin-top: 20px; line-height: 1.7; color: var(--muted); }
+.home-writing-links { border-top: 1px solid var(--line); }
+.home-writing-links a { display: grid; grid-template-columns: 70px 1fr auto; align-items: center; gap: 20px; min-height: 100px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.home-writing-links strong { font-family: var(--font-serif), Georgia, serif; font-size: 25px; font-weight: 400; letter-spacing: -.03em; }
+.home-writing-links a > span { font-size: 14px; }
+.home-writing-links a:hover strong { text-decoration: underline; text-underline-offset: 5px; }
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .writing-entry::before { animation: scene-scroll linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
+    }
+}
+@keyframes scene-scroll { from { transform: scale(1.05) translateY(8px); } to { transform: scale(1.05) translateY(-8px); } }
+@media(max-width:700px) {
+    .name-vine { bottom: 5px; }
+    .home-writing { grid-template-columns: 1fr; gap: 30px; padding-top: 0; padding-bottom: 80px; }
+    .home-writing-links a { grid-template-columns: 52px 1fr auto; }
+    .writing-entry::before, .reading-header::before { background-position: 62% center; }
+    .writing-entry-grace::before, .reading-grace .reading-header::before { background-image: linear-gradient(90deg, #d0dce0f7 0%, #d0dce0cc 56%, #d0dce055 100%), url('/images/grace-scene.svg'); }
+    .writing-entry-journey::before, .reading-journey .reading-header::before { background-image: linear-gradient(90deg, #e8eddcf7 0%, #e8eddccc 56%, #e8eddc55 100%), url('/images/journey-scene.svg'); }
+}
+@media(prefers-reduced-motion:reduce) { .name-vine path, .writing-entry::before { animation: none; } }
+
+body:has(.reading-page) .header-contact { background: var(--paper); }
+
+@media (prefers-reduced-motion: no-preference) {
+    .reading-grace .reading-header::before { animation: window-drift 20s ease-in-out infinite alternate; }
+    .reading-journey .reading-header::before { animation: path-breathe 24s ease-in-out infinite alternate; }
+}
+@keyframes window-drift { from { transform: scale(1.025) translateX(-5px); } to { transform: scale(1.025) translateX(5px); } }
+@keyframes path-breathe { from { transform: scale(1.02) translateY(3px); } to { transform: scale(1.05) translateY(-3px); } }
+
+.mark { width: 24px; height: 24px; color: #365a48; }

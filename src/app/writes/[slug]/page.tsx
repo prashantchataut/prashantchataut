@@ -11,5 +11,5 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 export default function WritePost({ params }: { params: { slug: string } }) {
     const post = posts.find(item => item.slug === params.slug);
     if (!post) notFound();
-    return <article className="subpage"><a href="/writes" className="back-link">← All notes</a><time className="article-time" dateTime={post.date}>{new Date(`${post.date}T12:00:00Z`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</time><h1>{post.title}</h1><div className="article-body">{post.body.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div></article>;
+    return <article className={`reading-page reading-${post.theme}`}><header className="reading-header"><div className="reading-header-inner"><a href="/writes" className="back-link">← All writing</a><p className="reading-kind">{post.kind}</p><h1>{post.title}</h1><p className="reading-byline">By Prashant Chataut</p></div></header><div className={`reading-body ${post.theme === 'grace' ? 'poem-body' : ''}`}>{post.body.map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div><div className="reading-end"><a href="/writes" className="text-link">More writing <span aria-hidden="true">↗</span></a></div></article>;
 }

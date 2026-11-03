@@ -3,6 +3,7 @@ import { Sora, Libre_Baskerville, Noto_Sans_Devanagari } from 'next/font/google'
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import { CursorButterflies } from '@/components/garden/Butterflies';
 
 const sora = Sora({
     subsets: ['latin'],
@@ -28,21 +29,21 @@ export const metadata: Metadata = {
     metadataBase: new URL('https://knowprashant.vercel.app'),
     title: 'Prashant Chataut',
     description:
-        'Prashant Chataut builds NEBians, Retra, and Prody from Nepal. Study apps, a GBA emulator, and quiet journaling.',
+        'Prashant Chataut builds NEBians, Kairos, and Retra from Nepal. Study apps, a GBA emulator, and quiet journaling.',
     keywords: [
         'Prashant Chataut',
         'NEBians',
         'Retra',
-        'Prody',
+        'Kairos',
         'developer Nepal',
         'study platform',
     ],
     authors: [{ name: 'Prashant Chataut' }],
     creator: 'Prashant Chataut',
-    icons: { icon: '/icon.png' },
+    icons: { icon: '/favicon.svg' },
     openGraph: {
         title: 'Prashant Chataut',
-        description: 'Builds NEBians, Retra, and Prody. Apps for school, GBA games, and journaling.',
+        description: 'Builds NEBians, Kairos, and Retra. Apps for learning, words, and play.',
         url: 'https://knowprashant.vercel.app',
         siteName: 'Prashant Chataut',
         type: 'website',
@@ -69,7 +70,7 @@ export default function RootLayout({
                 url: 'https://knowprashant.vercel.app',
                 name: 'Prashant Chataut',
                 description:
-                    'Prashant Chataut builds NEBians, Retra, and Prody from Nepal.',
+                    'Prashant Chataut builds NEBians, Kairos, and Retra from Nepal.',
             },
             {
                 '@type': 'Person',
@@ -81,7 +82,7 @@ export default function RootLayout({
                     'https://instagram.com/prashantchataut_',
                 ],
                 jobTitle: 'Developer',
-                description: 'Builds NEBians, Retra, and Prody from Nepal.',
+                description: 'Builds NEBians, Kairos, and Retra from Nepal.',
                 knowsAbout: [
                     'Mobile Development',
                     'Product Design',
@@ -114,6 +115,7 @@ export default function RootLayout({
             </head>
             <body className="antialiased">
                 <a href="#main-content" className="skip-to-content">Skip to content</a>
+                    <CursorButterflies />
                     <Header />
                     <main id="main-content" className="relative z-10 min-h-screen">
                         {children}

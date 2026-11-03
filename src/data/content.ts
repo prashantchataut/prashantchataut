@@ -36,8 +36,8 @@ export const about = {
         "NEBians is the big one: students upload notes and past papers, ask questions on the forum, check exam updates. Retra is me rebuilding the Game Boy Advance games I used to play. Prody is for writing and reflecting without a streak counter yelling at you.",
         "I live and work in Nepal. If you want to talk about a project, email works.",
     ],
-    photoSrc: "/images/prashant-photo.jpg",
-    photoAlt: "Prashant Chataut",
+    photoSrc: "/images/prashant-avatar.svg",
+    photoAlt: "An illustration of Prashant as a child",
     links: {
         github: "https://github.com/prashantchataut",
         instagram: "https://instagram.com/prashantchataut_",
@@ -114,7 +114,7 @@ export const prody = {
 export const site = {
     title: "Prashant Chataut",
     description:
-        "Prashant Chataut builds NEBians, Retra, and Prody. Apps for school, GBA games, and journaling. From Nepal.",
+        "Prashant Chataut builds NEBians, Kairos, and Retra, and writes from Nepal.",
     url: "https://knowprashant.vercel.app",
     links: {
         github: "https://github.com/prashantchataut",
