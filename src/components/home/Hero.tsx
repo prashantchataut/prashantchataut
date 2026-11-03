@@ -58,27 +58,27 @@ export default function Hero() {
                 <div className="grid gap-10 border-t border-edge pt-8 md:grid-cols-12">
                     <Reveal delay={260} className="md:col-span-5">
                         <p className="max-w-[42ch] text-[clamp(1rem,1.35vw,1.12rem)] leading-relaxed text-mist">
-                            {hero.standfirst}
+                            {hero.subtext}
                         </p>
                     </Reveal>
 
                     <Reveal delay={330} className="md:col-span-4 md:col-start-9">
                         <div className="flex flex-col items-start gap-4">
-                            {hero.actions.map((a) => (
+                            {[hero.primaryCta, hero.secondaryCta, hero.tertiaryCta].map((cta) => (
                                 <a
-                                    key={a.label}
-                                    href={a.href}
-                                    {...(a.external
+                                    key={cta.label}
+                                    href={cta.href}
+                                    {...(cta.href.startsWith('http')
                                         ? { target: '_blank', rel: 'noopener noreferrer' }
                                         : {})}
                                     className="group inline-flex items-baseline gap-3 border-b border-ink pb-1 font-mono text-[0.68rem] uppercase tracking-micro text-ink transition-colors duration-300 ease-glacial hover:border-glacier hover:text-glacier"
                                 >
-                                    {a.label}
+                                    {cta.label}
                                     <span
                                         aria-hidden="true"
                                         className="inline-block transition-transform duration-300 ease-glacial group-hover:translate-x-1 group-hover:-translate-y-0.5"
                                     >
-                                        {a.external ? '↗' : '→'}
+                                        {cta.href.startsWith('http') ? '↗' : '→'}
                                     </span>
                                 </a>
                             ))}

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { --paper:#f8f8f3; --ink:#172b35; --muted:#435a63; --blue:#b5d7e8; --line:#ccd6d5; --cream:#f5eccc; --mint:#d4e7d9; --sand:#f8f8f3; --mist:#435a63; --accent:#23619a; --surface:#fff; --surface-elevated:#edf3f2; --border:#ccd6d5; }
+:root { --paper:#f8f8f3; --ink:#172b35; --muted:#435a63; --blue:#b5d7e8; --line:#ccd6d5; --cream:#f5eccc; --mint:#d4e7d9; --sand:#f8f8f3; --mist:#435a63; --accent:#23619a; --surface:#fff; --surface-elevated:#edf3f2; --border:#ccd6d5; --glacier:#23619a; --faint:#56707a; --edge:#d6dcd8; --ice:#eef3f2; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; overflow-x:clip; }
 body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-sans),Arial,sans-serif; overflow-x:clip; }
@@ -94,3 +94,12 @@ h1,h2,h3 { font-family:var(--font-serif),Georgia,serif; font-weight:400; letter-
 @media(max-width:700px) { .site-header { padding:16px 20px; } .wordmark { font-size:13px; } .mark { font-size:20px; } .main-nav { gap:14px; font-size:13px; } .header-contact { display:none; } .hero { padding:130px 20px 24px; } .hero h1 { font-size:clamp(42px,10vw,64px); } .hero h1 br { display:none; } .hero-actions { gap:12px; flex-wrap:wrap; margin-bottom:32px; } .hero-art { height:320px; background-position:58% center; } .hero-caption { font-size:11px; } .section-wrap { padding-left:20px; padding-right:20px; } .work { padding-top:80px; padding-bottom:55px; } .section-heading { display:block; margin-bottom:30px; } .section-heading > p { margin-top:20px; } .project { grid-template-columns:1fr; margin-bottom:20px; } .project-copy { padding:28px; min-height:350px; } .project h3 { margin-top:40px; } .project-visual { min-height:390px; } .project-retra .project-visual { order:2; } .project-retra .project-copy { order:1; } .phone { width:30%; } .game-pixel { top:23%; transform:translateX(-50%) rotate(-8deg) scale(.85); transform-origin:top center; } .about { grid-template-columns:1fr; gap:48px; padding-top:25px; padding-bottom:90px; } .about-photo { width:85%; } .site-footer { padding:70px 20px 24px; } .footer-bottom { margin-top:75px; align-items:start; flex-direction:column-reverse; } .footer-links { gap:20px; } .subpage { padding:130px 20px 80px; } }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
 @media(max-width:370px) { .site-header { padding-left:16px; padding-right:16px; } .header-inner { gap:8px; } .wordmark { font-size:12px; } .main-nav { gap:9px; font-size:12px; } }
+
+/* Glacier layer: utilities referenced by the redesigned Hero + shared ui components. */
+.lattice { background-image: linear-gradient(to right, var(--edge) 1px, transparent 1px), linear-gradient(to bottom, var(--edge) 1px, transparent 1px); background-size: 96px 96px; }
+.hairline { height:1px; border:0; background:var(--edge); }
+.reveal { opacity:0; transform:translateY(14px); transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); transition-delay:var(--reveal-delay, 0ms); }
+.reveal[data-visible="true"] { opacity:1; transform:none; }
+.link-quiet { color:var(--faint); transition:color .3s cubic-bezier(.22,1,.36,1); }
+.link-quiet:hover { color:var(--glacier); }
+@media(prefers-reduced-motion:reduce) { .reveal { opacity:1; transform:none; transition:none; } }

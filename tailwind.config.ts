@@ -11,7 +11,15 @@ const config: Config = {
             fontFamily: {
                 sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui'],
                 serif: ['var(--font-serif)', 'ui-serif', 'Georgia', 'serif'],
+                literary: ['var(--font-serif)', 'ui-serif', 'Georgia', 'serif'],
+                mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
                 devanagari: ['var(--font-devanagari)', 'var(--font-sans)', 'sans-serif'],
+            },
+            letterSpacing: {
+                micro: '0.18em',
+            },
+            transitionTimingFunction: {
+                glacial: 'cubic-bezier(0.22, 1, 0.36, 1)',
             },
             colors: {
                 sand: 'var(--sand)',
@@ -19,6 +27,10 @@ const config: Config = {
                 ink: 'var(--ink)',
                 slate: 'var(--slate)',
                 mist: 'var(--mist)',
+                glacier: 'var(--glacier)',
+                faint: 'var(--faint)',
+                edge: 'var(--edge)',
+                ice: 'var(--ice)',
                 accent: {
                     DEFAULT: 'var(--accent)',
                     light: 'var(--accent-light)',
