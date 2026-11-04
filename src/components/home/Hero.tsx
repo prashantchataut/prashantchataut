@@ -1,3 +1,4 @@
+import FloralName from '@/components/floral/FloralName';
 import HeroScene from '@/components/hero/HeroScene';
 import PixelIcon from '@/components/pixel/PixelIcon';
 import PixelSprite from '@/components/pixel/PixelSprite';
@@ -10,7 +11,7 @@ export default async function Hero() {
   <div className="hero-sky">
    <HeroScene days={data?.days ?? null} textId="hero-text" />
    <div id="hero-text" className="hero-text">
-    <h1 id="hero-title">Prashant Chataut</h1>
+    <FloralName id="hero-title" text="Prashant Chataut" />
     <p className="hero-copy">Developer from Nepal. I make apps to solve things that matter to me.</p>
     <div className="hero-actions"><a className="button button-dark" href="#work">See my work <PixelIcon name="down" /></a><a className="text-link" href="/writes">Read my writing <PixelIcon name="right" /></a></div>
    </div>

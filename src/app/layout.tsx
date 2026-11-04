@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Sora, Libre_Baskerville, Noto_Sans_Devanagari, Pixelify_Sans } from 'next/font/google';
 import './globals.css';
+import './bloom.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { CursorButterflies } from '@/components/garden/Butterflies';
@@ -45,13 +46,16 @@ export const metadata: Metadata = {
     icons: { icon: '/favicon-pixel.svg' },
     openGraph: {
         title: 'Prashant Chataut',
-        description: 'Builds apps and writes from Nepal.',
+        description: 'Developer from Nepal. I make apps to solve things that matter to me.',
         url: 'https://knowprashant.vercel.app',
         siteName: 'Prashant Chataut',
         type: 'website',
+        locale: 'en',
     },
     twitter: {
         card: 'summary_large_image',
+        title: 'Prashant Chataut',
+        description: 'Developer from Nepal. I make apps to solve things that matter to me.',
     },
     alternates: {
         canonical: 'https://knowprashant.vercel.app',
