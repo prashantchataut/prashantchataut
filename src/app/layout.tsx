@@ -1,13 +1,21 @@
 import type { Metadata } from 'next';
-import { Sora, Libre_Baskerville, Noto_Sans_Devanagari } from 'next/font/google';
+import { Sora, Libre_Baskerville, Noto_Sans_Devanagari, Pixelify_Sans } from 'next/font/google';
 import './globals.css';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
-import { CursorButterflies } from '@/components/garden/Butterflies';
+import './garden.css';
+import SiteHeader from '@/components/garden/SiteHeader';
+import SiteFooter from '@/components/garden/SiteFooter';
+import Ambient from '@/components/garden/Ambient';
 
 const sora = Sora({
     subsets: ['latin'],
     variable: '--font-sans',
+    display: 'swap',
+});
+
+const pixelify = Pixelify_Sans({
+    weight: ['500', '700'],
+    subsets: ['latin'],
+    variable: '--font-pixel',
     display: 'swap',
 });
 
@@ -109,19 +117,19 @@ export default function RootLayout({
     };
 
     return (
-        <html lang="en" suppressHydrationWarning className={`${sora.variable} ${libreBaskerville.variable} ${notoDevanagari.variable}`}>
+        <html lang="en" suppressHydrationWarning className={`${sora.variable} ${pixelify.variable} ${libreBaskerville.variable} ${notoDevanagari.variable}`}>
             <head>
-                <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem("theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}})()` }} />
+                <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem("theme");if(!t){var h=Number(new Intl.DateTimeFormat("en-US",{timeZone:"Asia/Kathmandu",hour:"numeric",hour12:false}).format(new Date()))%24;t=h>=6&&h<18?"light":"dark"}document.documentElement.dataset.theme=t}catch(e){}})()` }} />
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             </head>
             <body className="antialiased">
                 <a href="#main-content" className="skip-to-content">Skip to content</a>
-                    <CursorButterflies />
-                    <Header />
+                    <Ambient />
+                    <SiteHeader />
                     <main id="main-content" className="relative z-10 min-h-screen">
                         {children}
                     </main>
-                    <Footer />
+                    <SiteFooter />
             </body>
         </html>
     );
