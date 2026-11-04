@@ -15,8 +15,8 @@ export function ProjectBloom({ kind, index }: { kind: number; index: string }) {
     }, []);
     return (
         <div ref={ref} className="project-bloom" data-open={open} aria-hidden="true">
-            <svg viewBox="-26 -26 52 52" width="64" height="64" focusable="false">
-                <g className="project-bloom-flower"><FlowerArt kind={kind} r={22} /></g>
+            <svg viewBox="-13 -13 26 26" width="24" height="24" focusable="false">
+                <g className="project-bloom-flower"><FlowerArt kind={kind} r={10} /></g>
             </svg>
             <span>{index}</span>
         </div>

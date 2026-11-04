@@ -143,92 +143,164 @@ export function perch(f: Fly, dt: number) {
     f.heading = lerpAngle(f.heading, -Math.PI / 2 + Math.sin(f.phase * 0.5) * 0.18, Math.min(1, dt * 3));
 }
 
+/*
+ * Rendering is kept deliberately cheap. Every frame of the wingbeat (wings, body and feelers) is baked once per species
+ * into its own small canvas, halos and sparkles are baked sprites too, so a butterfly costs two drawImage calls and
+ * no gradients per frame. Each canvas also remembers the box it painted, and only that box is cleared next frame.
+ */
+const FRAMES = 14;
+const KB = 0.85;
+const frameCache = new Map<string, HTMLCanvasElement[]>();
+const haloCache = new Map<string, HTMLCanvasElement>();
+const sparkCache = new Map<string, HTMLCanvasElement>();
+
+function frameSet(s: Species): HTMLCanvasElement[] {
+    const hit = frameCache.get(s.name);
+    if (hit) return hit;
+    const sprite = wingSprite(s);
+    const list: HTMLCanvasElement[] = [];
+    for (let n = 0; n < FRAMES; n++) {
+        const fx = Math.max(0.05, 0.05 + 0.95 * (n / (FRAMES - 1)));
+        const c = document.createElement('canvas');
+        c.width = Math.round(DW * 2 * KB);
+        c.height = Math.round(DH * KB);
+        const g = c.getContext('2d')!;
+        g.scale(KB, KB);
+        g.translate(DW, DH / 2);
+        g.imageSmoothingQuality = 'high';
+        g.drawImage(sprite, 0, -DH / 2, DW * fx, DH);
+        g.save();
+        g.scale(-1, 1);
+        g.drawImage(sprite, 0, -DH / 2, DW * fx, DH);
+        g.restore();
+        g.fillStyle = '#1a1020';
+        g.beginPath(); g.ellipse(0, 3, 3.1, 19, 0, 0, 6.2832); g.fill();
+        g.beginPath(); g.arc(0, -17, 3.6, 0, 6.2832); g.fill();
+        g.strokeStyle = '#1a1020';
+        g.lineWidth = 1.3;
+        g.lineCap = 'round';
+        g.beginPath();
+        g.moveTo(-1.5, -19); g.quadraticCurveTo(-6, -32, -13, -38);
+        g.moveTo(1.5, -19); g.quadraticCurveTo(6, -32, 13, -38);
+        g.stroke();
+        g.fillStyle = s.spot;
+        g.beginPath(); g.arc(-13, -38, 1.8, 0, 6.2832); g.arc(13, -38, 1.8, 0, 6.2832); g.fill();
+        list.push(c);
+    }
+    frameCache.set(s.name, list);
+    return list;
+}
+
+function haloSprite(s: Species, night: boolean): HTMLCanvasElement {
+    const key = s.name + (night ? 'n' : 'd');
+    const hit = haloCache.get(key);
+    if (hit) return hit;
+    const c = document.createElement('canvas');
+    c.width = c.height = 64;
+    const g = c.getContext('2d')!;
+    const grad = g.createRadialGradient(32, 32, 3, 32, 32, 32);
+    grad.addColorStop(0, s.glow + (night ? 'aa' : '55'));
+    grad.addColorStop(1, s.glow + '00');
+    g.fillStyle = grad;
+    g.fillRect(0, 0, 64, 64);
+    haloCache.set(key, c);
+    return c;
+}
+
+function sparkSprite(color: string): HTMLCanvasElement {
+    const hit = sparkCache.get(color);
+    if (hit) return hit;
+    const c = document.createElement('canvas');
+    c.width = c.height = 24;
+    const g = c.getContext('2d')!;
+    g.translate(12, 12);
+    g.fillStyle = color;
+    const r = 5;
+    g.beginPath();
+    g.moveTo(0, -r * 2);
+    g.quadraticCurveTo(0, 0, r * 2, 0);
+    g.quadraticCurveTo(0, 0, 0, r * 2);
+    g.quadraticCurveTo(0, 0, -r * 2, 0);
+    g.quadraticCurveTo(0, 0, 0, -r * 2);
+    g.fill();
+    sparkCache.set(color, c);
+    return c;
+}
+
+type Box = { x0: number; y0: number; x1: number; y1: number };
+const boxes = new WeakMap<CanvasRenderingContext2D, Box>();
+function boxOf(g: CanvasRenderingContext2D): Box {
+    let b = boxes.get(g);
+    if (!b) { b = { x0: Infinity, y0: Infinity, x1: -Infinity, y1: -Infinity }; boxes.set(g, b); }
+    return b;
+}
+function grow(b: Box, x: number, y: number, pad: number) {
+    if (x - pad < b.x0) b.x0 = x - pad;
+    if (y - pad < b.y0) b.y0 = y - pad;
+    if (x + pad > b.x1) b.x1 = x + pad;
+    if (y + pad > b.y1) b.y1 = y + pad;
+}
+
+/** Clear only what the previous frame painted. */
+export function clearDirty(g: CanvasRenderingContext2D) {
+    const b = boxOf(g);
+    if (b.x1 >= b.x0) g.clearRect(Math.floor(b.x0) - 2, Math.floor(b.y0) - 2, Math.ceil(b.x1 - b.x0) + 4, Math.ceil(b.y1 - b.y0) + 4);
+    b.x0 = b.y0 = Infinity; b.x1 = b.y1 = -Infinity;
+}
+
 export function drawFly(g: CanvasRenderingContext2D, f: Fly, night: boolean, alpha = 1) {
-    const sprite = wingSprite(f.sp);
+    const frames = frameSet(f.sp);
+    const frame = frames[Math.round(Math.max(0, Math.min(1, (f.flap - 0.05) / 0.95)) * (FRAMES - 1))];
     const s = f.size / 150;
+    const halo = haloSprite(f.sp, night);
+    grow(boxOf(g), f.x, f.y, f.size * 0.62 + 4);
     g.save();
     g.globalAlpha = alpha;
     g.translate(f.x, f.y);
     g.rotate(f.heading + Math.PI / 2);
     g.scale(s, s);
-
-    const halo = g.createRadialGradient(0, 0, 4, 0, 0, 92);
-    halo.addColorStop(0, night ? f.sp.glow + 'aa' : f.sp.glow + '55');
-    halo.addColorStop(1, f.sp.glow + '00');
-    g.globalCompositeOperation = night ? 'lighter' : 'source-over';
-    g.fillStyle = halo;
-    g.beginPath();
-    g.arc(0, 0, 92, 0, 6.2832);
-    g.fill();
+    if (night) g.globalCompositeOperation = 'lighter';
+    g.drawImage(halo, -80, -80, 160, 160);
     g.globalCompositeOperation = 'source-over';
-
-    const fx = Math.max(0.05, f.flap);
-    g.imageSmoothingQuality = 'high';
-    g.drawImage(sprite, 0, -DH / 2, DW * fx, DH);
-    g.save();
-    g.scale(-1, 1);
-    g.drawImage(sprite, 0, -DH / 2, DW * fx, DH);
-    g.restore();
-
-    g.fillStyle = '#1a1020';
-    g.beginPath();
-    g.ellipse(0, 3, 3.1, 19, 0, 0, 6.2832);
-    g.fill();
-    g.beginPath();
-    g.arc(0, -17, 3.6, 0, 6.2832);
-    g.fill();
-    g.strokeStyle = '#1a1020';
-    g.lineWidth = 1.3;
-    g.lineCap = 'round';
-    g.beginPath();
-    g.moveTo(-1.5, -19); g.quadraticCurveTo(-6, -32, -13, -38);
-    g.moveTo(1.5, -19); g.quadraticCurveTo(6, -32, 13, -38);
-    g.stroke();
-    g.fillStyle = f.sp.spot;
-    g.beginPath();
-    g.arc(-13, -38, 1.8, 0, 6.2832);
-    g.arc(13, -38, 1.8, 0, 6.2832);
-    g.fill();
+    g.drawImage(frame, -DW, -DH / 2, DW * 2, DH);
     g.restore();
 }
 
 export type Dust = { x: number; y: number; vx: number; vy: number; life: number; max: number; size: number; color: string; spin: number };
 
-export function emit(list: Dust[], x: number, y: number, color: string, power = 1, limit = 140) {
+export function emit(list: Dust[], x: number, y: number, color: string, power = 1, limit = 56) {
     if (list.length >= limit) return;
     const a = Math.random() * 6.2832;
     const v = (8 + Math.random() * 26) * power;
     list.push({
         x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v + 8,
-        life: 0, max: 0.7 + Math.random() * 0.9, size: 1.6 + Math.random() * 2.8, color, spin: Math.random() * 6.28,
+        life: 0, max: 0.7 + Math.random() * 0.9, size: 1.6 + Math.random() * 2.8, color, spin: 0,
     });
 }
 
 export function stepDust(g: CanvasRenderingContext2D, list: Dust[], dt: number) {
+    if (!list.length) return;
+    const b = boxOf(g);
     g.save();
     g.globalCompositeOperation = 'lighter';
     for (let i = list.length - 1; i >= 0; i--) {
         const p = list[i];
         p.life += dt;
-        if (p.life >= p.max) { list.splice(i, 1); continue; }
+        if (p.life >= p.max) { list[i] = list[list.length - 1]; list.pop(); continue; }
         p.vy += 22 * dt;
         p.vx *= 0.985;
         p.x += p.vx * dt;
         p.y += p.vy * dt;
-        p.spin += dt * 5;
         const k = 1 - p.life / p.max;
+        const d = p.size * (0.5 + k * 0.7) * 2.4;
         g.globalAlpha = k * 0.95;
-        g.fillStyle = p.color;
-        const r = p.size * (0.5 + k * 0.7);
-        g.beginPath();
-        g.moveTo(p.x, p.y - r * 1.8);
-        g.quadraticCurveTo(p.x, p.y, p.x + r * 1.8, p.y);
-        g.quadraticCurveTo(p.x, p.y, p.x, p.y + r * 1.8);
-        g.quadraticCurveTo(p.x, p.y, p.x - r * 1.8, p.y);
-        g.quadraticCurveTo(p.x, p.y, p.x, p.y - r * 1.8);
-        g.fill();
+        g.drawImage(sparkSprite(p.color), p.x - d / 2, p.y - d / 2, d, d);
+        grow(b, p.x, p.y, d);
     }
     g.restore();
 }
 
 export const isNight = () => document.documentElement.dataset.theme === 'dark';
+
+/** Minimum gap between painted frames (ms). Caps 120Hz and 144Hz screens at roughly 60fps so the wings never cost double. */
+export const FRAME_MS = 15;

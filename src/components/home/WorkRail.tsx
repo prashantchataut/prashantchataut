@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import FlowerArt from '@/components/floral/FlowerArt';
 
 const ITEMS = [
     { id: 'nebians', name: 'NEBians', kind: 3, tone: 'iris' },
@@ -9,7 +8,7 @@ const ITEMS = [
     { id: 'glamo', name: 'Glamo Nepal', kind: 0, tone: 'coral' },
 ] as const;
 
-/** A sticky guide through the work: each project is a flower that opens as the page reaches it, and a vine grows along the way. */
+/** A quiet sticky guide through the work, with a hairline that fills as you scroll. */
 export default function WorkRail() {
     const rail = useRef<HTMLElement>(null);
     const [active, setActive] = useState(-1);
@@ -44,11 +43,6 @@ export default function WorkRail() {
                 {ITEMS.map((item, i) => (
                     <li key={item.id}>
                         <a href={`#${item.id}`} data-tone={item.tone} data-reached={i <= active} aria-current={i === active ? 'location' : undefined}>
-                            <svg viewBox="-20 -20 40 40" width="26" height="26" aria-hidden="true" focusable="false">
-                                <g style={{ transform: `scale(${i <= active ? 1 : 0.42}) rotate(${i <= active ? 0 : -70}deg)` }} className="work-rail-flower">
-                                    <FlowerArt kind={item.kind} r={15} />
-                                </g>
-                            </svg>
                             <span>{item.name}</span>
                         </a>
                     </li>

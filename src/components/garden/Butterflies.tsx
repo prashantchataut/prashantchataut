@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import { SPECIES, drawFly, emit, fly, isNight, makeFly, stepDust, type Dust, type Fly } from '@/components/wings/wings';
+import { FRAME_MS, SPECIES, clearDirty, drawFly, emit, fly, isNight, makeFly, stepDust, type Dust, type Fly } from '@/components/wings/wings';
 
 /**
  * A small flutter of vivid butterflies that keeps the pointer company on any page.
@@ -22,12 +22,12 @@ export function CursorButterflies() {
             makeFly(-200, -200, size * (0.8 + ((i * 37) % 10) / 22), (i * 2 + 1) % SPECIES.length, ((i + 1) * 0.211) % 1),
         );
         const dust: Dust[] = [];
-        let W = 0, H = 0, raf = 0, last = 0;
+        let W = 0, H = 0, raf = 0, last = 0, painted = 0;
         let px = -200, py = -200, lastMove = 0, started = false;
         let alpha = 0, target = 0;
 
         const resize = () => {
-            const dpr = Math.min(devicePixelRatio || 1, 2);
+            const dpr = Math.min(devicePixelRatio || 1, 1.5);
             W = innerWidth; H = innerHeight;
             c.width = Math.round(W * dpr); c.height = Math.round(H * dpr);
             c.style.width = W + 'px'; c.style.height = H + 'px';
@@ -39,7 +39,7 @@ export function CursorButterflies() {
                 const a = f.ang + i * 1.7;
                 f.vx += Math.cos(a) * power;
                 f.vy += Math.sin(a) * power - power * 0.25;
-                for (let k = 0; k < 7; k++) emit(dust, f.x, f.y, f.sp.glow, 1.6);
+                for (let k = 0; k < 5; k++) emit(dust, f.x, f.y, f.sp.glow, 1.6);
             });
         };
 
@@ -57,14 +57,16 @@ export function CursorButterflies() {
         const tick = (now: number) => {
             raf = requestAnimationFrame(tick);
             if (document.hidden) { last = now; return; }
+            if (now - painted < FRAME_MS) return;
+            painted = now;
             const dt = Math.min((now - (last || now)) / 1000, 0.05);
             last = now;
             const t = now / 1000;
             alpha += (target - alpha) * Math.min(1, dt * 4);
             if (coarse && target && now - lastMove > 5000) target = 0;
-            if (alpha < 0.01 && dust.length === 0) { if (alpha !== 0) { g.clearRect(0, 0, W, H); alpha = 0; } return; }
+            if (alpha < 0.01 && dust.length === 0) { if (alpha !== 0) { clearDirty(g); alpha = 0; } return; }
 
-            g.clearRect(0, 0, W, H);
+            clearDirty(g);
             const resting = now - lastMove > 2500;
             const night = isNight();
             for (const f of flock) {
@@ -75,7 +77,7 @@ export function CursorButterflies() {
                 const gap = Math.hypot(tx - f.x, ty - f.y);
                 fly(f, tx, ty, dt, t, 240 + gap * 1.5);
                 const speed = Math.hypot(f.vx, f.vy);
-                if (speed > 40 && Math.random() < dt * (speed / 40)) emit(dust, f.x, f.y + 4, f.sp.glow, 0.6);
+                if (speed > 40 && Math.random() < dt * (speed / 70)) emit(dust, f.x, f.y + 4, f.sp.glow, 0.6);
             }
             stepDust(g, dust, dt);
             for (const f of flock) drawFly(g, f, night, alpha);

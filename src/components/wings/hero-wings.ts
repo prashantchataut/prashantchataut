@@ -2,7 +2,7 @@
  * Butterflies of the hero meadow. They drift between the blooming plants, settle on them with slow wings,
  * take an interest in the pointer and glow after dark. Everything pauses while the hero is off screen.
  */
-import { SPECIES, drawFly, emit, fly, isNight, makeFly, perch, stepDust, type Dust, type Fly } from './wings';
+import { FRAME_MS, SPECIES, clearDirty, drawFly, emit, fly, isNight, makeFly, perch, stepDust, type Dust, type Fly } from './wings';
 
 export type Bloom = { x: number; y: number; count: number };
 
@@ -11,7 +11,7 @@ export function startHeroWings(root: HTMLElement, canvas: HTMLCanvasElement) {
     if (!g) return { setBlooms() {}, stop() {} };
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    let W = 0, H = 0, raf = 0, last = 0, running = false;
+    let W = 0, H = 0, raf = 0, last = 0, painted = 0, running = false;
     let blooms: Bloom[] = [];
     let pointer = { x: -999, y: -999, inside: false };
     const dust: Dust[] = [];
@@ -19,7 +19,7 @@ export function startHeroWings(root: HTMLElement, canvas: HTMLCanvasElement) {
 
     const resize = () => {
         const r = root.getBoundingClientRect();
-        const dpr = Math.min(devicePixelRatio || 1, 2);
+        const dpr = Math.min(devicePixelRatio || 1, 1.5);
         W = Math.max(1, Math.round(r.width)); H = Math.max(1, Math.round(r.height));
         canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
         canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
@@ -55,7 +55,7 @@ export function startHeroWings(root: HTMLElement, canvas: HTMLCanvasElement) {
     }
 
     const frame = (t: number, dt: number) => {
-        g.clearRect(0, 0, W, H);
+        clearDirty(g);
         const night = isNight();
         for (const f of flock) {
             if (f.landed) {
@@ -80,6 +80,8 @@ export function startHeroWings(root: HTMLElement, canvas: HTMLCanvasElement) {
     const loop = (now: number) => {
         if (!running) return;
         raf = requestAnimationFrame(loop);
+        if (now - painted < FRAME_MS) return;
+        painted = now;
         const dt = Math.min((now - (last || now)) / 1000, 0.05);
         last = now;
         frame(now / 1000, dt);
@@ -94,7 +96,7 @@ export function startHeroWings(root: HTMLElement, canvas: HTMLCanvasElement) {
             if (b) { f.x = b.x; f.y = b.y - 3; }
             f.flap = 0.85; f.heading = -Math.PI / 2;
         });
-        g.clearRect(0, 0, W, H);
+        clearDirty(g);
         for (const f of flock) drawFly(g, f, isNight());
     };
 

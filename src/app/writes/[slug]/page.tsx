@@ -5,6 +5,7 @@ import { posts } from '@/data/posts';
 import { readingMinutes } from '@/lib/reading';
 import ReadingAtmosphere from '@/components/reading/ReadingAtmosphere';
 import ShareBar from '@/components/reading/ShareBar';
+import MarginArt from '@/components/reading/MarginArt';
 
 type Params = { slug: string };
 type Props = { params: Params | Promise<Params> };
@@ -63,6 +64,7 @@ export default async function WritePost({ params }: Props) {
             <div className={`reading-body ${post.theme === 'grace' ? 'poem-body' : ''}`}>
                 {post.body.map((paragraph, i) => (
                     <div className="reading-passage" key={i}>
+                        <MarginArt theme={post.theme} index={i} />
                         <span className="passage-mark" aria-hidden="true" />
                         <p>{paragraph}</p>
                     </div>

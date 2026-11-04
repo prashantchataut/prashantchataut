@@ -45,74 +45,55 @@ export function CopyEmail({ email }: { email: string }) {
 
 type Bud = { x: number; y: number; r: number; kind: number; delay: number; dir: number };
 
-/** A row of flowers growing from the landscape. They open as the footer arrives and answer to touch. */
+const SPRIG_W = 150;
+const SPRIG_H = 92;
+/** Three small flowers on hairline stems, tucked into the corner. They open as the footer arrives and answer to touch. */
+const BUDS: Bud[] = [
+    { x: 26, y: 40, r: 7, kind: 4, delay: 300, dir: -1 },
+    { x: 78, y: 18, r: 9, kind: 2, delay: 520, dir: 1 },
+    { x: 124, y: 46, r: 6.5, kind: 1, delay: 740, dir: -1 },
+];
+
 export function FooterGarden() {
-    const wrap = useRef<HTMLDivElement>(null);
     const svg = useRef<SVGSVGElement>(null);
     const layer = useRef<SVGGElement>(null);
     const els = useRef<(SVGGElement | null)[]>([]);
-    const [width, setWidth] = useState(0);
     const [grown, setGrown] = useState(false);
-    const HEIGHT = 190;
-
-    useEffect(() => {
-        const el = wrap.current;
-        if (!el) return;
-        const measure = () => setWidth(el.clientWidth);
-        measure();
-        const ro = new ResizeObserver(measure);
-        ro.observe(el);
-        return () => ro.disconnect();
-    }, []);
-
-    const buds = useMemo<Bud[]>(() => {
-        if (width < 200) return [];
-        const n = Math.max(6, Math.floor(width / 92));
-        return Array.from({ length: n }, (_, i) => {
-            const h = Math.sin(i * 12.9898) * 43758.5453;
-            const rnd = h - Math.floor(h);
-            const x = ((i + 0.5) / n) * width + (rnd - 0.5) * 30;
-            const tall = 60 + ((i * 53) % 7) * 17;
-            return { x, y: HEIGHT - tall, r: 14 + ((i * 5) % 4) * 3, kind: (i * 2 + 1) % 5, delay: 150 + Math.abs(i - n / 2) * 110, dir: i % 2 ? 1 : -1 };
-        });
-    }, [width]);
 
     useEffect(() => {
         const node = svg.current;
-        if (!node || !buds.length) return;
+        if (!node) return;
         const io = new IntersectionObserver(([e]) => setGrown(e.isIntersecting));
         io.observe(node);
         return () => io.disconnect();
-    }, [buds]);
+    }, []);
 
     useEffect(() => {
         const node = svg.current, petals = layer.current;
-        if (!node || !petals || !buds.length) return;
-        const items: Item[] = buds.map((b, i) => ({ el: els.current[i] as SVGGElement, x: b.x, y: b.y, r: b.r, delay: b.delay, dir: b.dir, color: FLOWER_COLORS[b.kind] }));
+        if (!node || !petals) return;
+        const items: Item[] = BUDS.map((b, i) => ({ el: els.current[i] as SVGGElement, x: b.x, y: b.y, r: b.r, delay: b.delay, dir: b.dir, color: FLOWER_COLORS[b.kind] }));
         return new Garden(node, items, { layer: petals, turn: 0.05 }).mount();
-    }, [buds]);
+    }, []);
 
     return (
-        <div ref={wrap} className="ft-garden" aria-hidden="true">
-            {buds.length > 0 && (
-                <svg ref={svg} className={grown ? 'is-grown' : undefined} width={width} height={HEIGHT} viewBox={`0 0 ${width} ${HEIGHT}`} focusable="false">
-                    {buds.map((b, i) => (
-                        <path
-                            key={`s${i}`}
-                            className="ft-stem"
-                            d={`M${b.x} ${HEIGHT + 4}C${b.x + (i % 2 ? 14 : -14)} ${HEIGHT - (HEIGHT - b.y) * 0.5} ${b.x - (i % 2 ? 10 : -10)} ${b.y + 30} ${b.x} ${b.y}`}
-                            pathLength={1}
-                            style={{ transitionDelay: `${b.delay - 100}ms` }}
-                        />
-                    ))}
-                    {buds.map((b, i) => (
-                        <g key={i} ref={(el) => { els.current[i] = el; }} transform={`translate(${b.x} ${b.y}) scale(0)`}>
-                            <FlowerArt kind={b.kind} r={b.r} />
-                        </g>
-                    ))}
-                    <g ref={layer} />
-                </svg>
-            )}
+        <div className="ft-garden" aria-hidden="true">
+            <svg ref={svg} className={grown ? 'is-grown' : undefined} width={SPRIG_W} height={SPRIG_H} viewBox={`0 0 ${SPRIG_W} ${SPRIG_H}`} focusable="false">
+                {BUDS.map((b, i) => (
+                    <path
+                        key={`s${i}`}
+                        className="ft-stem"
+                        d={`M${b.x + (i === 1 ? 0 : i === 0 ? 8 : -8)} ${SPRIG_H + 2}C${b.x + (i % 2 ? 10 : -10)} ${SPRIG_H - (SPRIG_H - b.y) * 0.5} ${b.x - (i % 2 ? 6 : -6)} ${b.y + 22} ${b.x} ${b.y}`}
+                        pathLength={1}
+                        style={{ transitionDelay: `${b.delay - 200}ms` }}
+                    />
+                ))}
+                {BUDS.map((b, i) => (
+                    <g key={i} ref={(el) => { els.current[i] = el; }} transform={`translate(${b.x} ${b.y}) scale(0)`}>
+                        <FlowerArt kind={b.kind} r={b.r} />
+                    </g>
+                ))}
+                <g ref={layer} />
+            </svg>
         </div>
     );
 }

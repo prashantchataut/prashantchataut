@@ -77,8 +77,8 @@ export function GrowthPath({ steps }: { steps: Step[] }) {
         <ol ref={root} className="path" data-seen={seen}>
             {steps.map((s, i) => (
                 <li key={s.title} style={{ ['--i' as string]: i }}>
-                    <svg viewBox="-24 -24 48 48" width="52" height="52" aria-hidden="true" focusable="false">
-                        <g className="path-flower"><FlowerArt kind={s.kind} r={19} /></g>
+                    <svg viewBox="-13 -13 26 26" width="26" height="26" aria-hidden="true" focusable="false">
+                        <g className="path-flower"><FlowerArt kind={s.kind} r={10} /></g>
                     </svg>
                     <h3>{s.title}</h3>
                     <p>{s.text}</p>
