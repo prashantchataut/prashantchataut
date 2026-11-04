@@ -30,36 +30,6 @@ export function PortraitReveal() {
     );
 }
 
-/** Plays the recorded pronunciation. */
-export function NameAudio({ phonetic, devanagari }: { phonetic: string; devanagari: string }) {
-    const audio = useRef<HTMLAudioElement | null>(null);
-    const [playing, setPlaying] = useState(false);
-    useEffect(() => () => { audio.current?.pause(); }, []);
-    const toggle = () => {
-        if (!audio.current) {
-            const a = new Audio('/audio/prashant-pronunciation.wav');
-            a.addEventListener('ended', () => setPlaying(false));
-            a.addEventListener('pause', () => setPlaying(false));
-            a.addEventListener('play', () => setPlaying(true));
-            audio.current = a;
-        }
-        const a = audio.current;
-        if (a.paused) { a.currentTime = 0; void a.play(); } else a.pause();
-    };
-    return (
-        <button type="button" className="name-audio" onClick={toggle} aria-pressed={playing}>
-            <span className="name-audio-icon" aria-hidden="true" data-playing={playing}>
-                <svg viewBox="0 0 24 24" width="18" height="18"><path d={playing ? 'M7 5h3.5v14H7zM13.5 5H17v14h-3.5z' : 'M8 5.5v13l11-6.5z'} /></svg>
-            </span>
-            <span>
-                <span lang="ne" className="name-audio-ne">{devanagari}</span>
-                <span className="name-audio-ph">{phonetic}</span>
-            </span>
-            <span className="sr-only">{playing ? 'Pause pronunciation' : 'Hear how to say Prashant'}</span>
-        </button>
-    );
-}
-
 export type Step = { title: string; text: string; kind: number };
 
 /** The projects as a vine: it grows across the page and each step flowers when the vine reaches it. */

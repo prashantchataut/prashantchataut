@@ -13,7 +13,6 @@ const config: Config = {
                 serif: ['var(--font-serif)', 'ui-serif', 'Georgia', 'serif'],
                 literary: ['var(--font-serif)', 'ui-serif', 'Georgia', 'serif'],
                 mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
-                devanagari: ['var(--font-devanagari)', 'var(--font-sans)', 'sans-serif'],
             },
             letterSpacing: {
                 micro: '0.18em',

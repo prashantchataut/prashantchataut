@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Sora, Libre_Baskerville, Noto_Sans_Devanagari, Pixelify_Sans } from 'next/font/google';
+import { Sora, Libre_Baskerville, Pixelify_Sans } from 'next/font/google';
 import './globals.css';
 import './bloom.css';
 import Header from '@/components/layout/Header';
@@ -18,13 +18,6 @@ const libreBaskerville = Libre_Baskerville({
     weight: ['400', '700'],
     subsets: ['latin'],
     variable: '--font-serif',
-    display: 'swap',
-});
-
-const notoDevanagari = Noto_Sans_Devanagari({
-    weight: ['400', '700'],
-    subsets: ['devanagari'],
-    variable: '--font-devanagari',
     display: 'swap',
 });
 
@@ -115,7 +108,7 @@ export default function RootLayout({
     };
 
     return (
-        <html lang="en" suppressHydrationWarning className={`${sora.variable} ${libreBaskerville.variable} ${notoDevanagari.variable} ${pixelify.variable}`}>
+        <html lang="en" suppressHydrationWarning className={`${sora.variable} ${libreBaskerville.variable} ${pixelify.variable}`}>
             <head>
                 <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem("theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}})()` }} />
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

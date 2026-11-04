@@ -1,8 +1,6 @@
 export const hero = {
     greeting: "Hey, I'm",
     name: "Prashant Chataut",
-    phonetic: "/pruh-SHAANT/",
-    devanagari: "प्रशान्त",
     tagline: "I build apps.",
     subtext:
         "Based in Nepal. Right now: NEBians (study notes, past papers, forums for students and teachers) and Retra (an Android GBA emulator for old Pokémon games). Also Prody, a quiet journaling app.",

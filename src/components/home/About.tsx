@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import PixelIcon from '@/components/pixel/PixelIcon';
-import { hero } from '@/data/content';
-import { GrowthPath, NameAudio, PortraitReveal, type Step } from './AboutBits';
+import { GrowthPath, PortraitReveal, type Step } from './AboutBits';
 
 const STEPS: Step[] = [
     { title: 'Labelwise', text: 'Also called IngredAI. It reads the labels on medicines, chemicals, beauty products and snacks.', kind: 3 },
@@ -20,7 +19,6 @@ export default function About() {
                     <h2 id="about-title">Hi, I’m Prashant.</h2>
                     <p>I’m a developer from Nepal. I make apps to solve things that matter to me.</p>
                     <p>I started building in grade 10. Since then I’ve worked on everything from study resources to a Game Boy Advance emulator.</p>
-                    <NameAudio phonetic={hero.phonetic} devanagari={hero.devanagari} />
                     <Link className="text-link" href="/writes/where-the-first-idea-led">
                         How the projects began <PixelIcon name="out" />
                     </Link>

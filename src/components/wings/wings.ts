@@ -8,6 +8,8 @@ export type Species = {
     name: string;
     foreA: string; foreB: string; hindA: string; hindB: string;
     edge: string; spot: string; glow: string; tail?: boolean;
+    /** Multiplier for the night/day halo. Quiet species keep it low so they never glare over the page. */
+    glowScale?: number;
 };
 
 export const SPECIES: Species[] = [
@@ -18,6 +20,31 @@ export const SPECIES: Species[] = [
     { name: 'violet', foreA: '#c9a4ff', foreB: '#6d2cff', hindA: '#a07bff', hindB: '#e04bff', edge: '#170b38', spot: '#f6ecff', glow: '#a35cff' },
     { name: 'emerald', foreA: '#8dffc4', foreB: '#00b86b', hindA: '#3df2a0', hindB: '#00b8c4', edge: '#03281c', spot: '#eafff4', glow: '#2dff9d' },
 ];
+
+/*
+ * The pointer flutter wears a quieter set. Same painted wings, but the pigment is washed out:
+ * paper, clay, sage, dust. They read as butterflies up close and as a soft mark from a distance.
+ */
+export const QUIET_SPECIES: Species[] = [
+    { name: 'quiet-ash', foreA: '#ded8cb', foreB: '#b3aa98', hindA: '#e6e1d5', hindB: '#c0b7a4', edge: '#3c372f', spot: '#f8f5ec', glow: '#d6cdb8', glowScale: 0.42 },
+    { name: 'quiet-clay', foreA: '#dcbfac', foreB: '#b48774', hindA: '#e6cdbb', hindB: '#c49b88', edge: '#402e28', spot: '#f7ede5', glow: '#d9b8a4', glowScale: 0.42 },
+    { name: 'quiet-sage', foreA: '#cdd6c6', foreB: '#97a992', hindA: '#d9e0d2', hindB: '#a8b8a2', edge: '#2e372f', spot: '#f3f6ee', glow: '#c8d2c1', glowScale: 0.42 },
+    { name: 'quiet-dusk', foreA: '#cdccdc', foreB: '#9a97b3', hindA: '#d8d7e4', hindB: '#aaa7c0', edge: '#2e2d3c', spot: '#f4f3f8', glow: '#cfccdc', glowScale: 0.42 },
+    { name: 'quiet-wheat', foreA: '#e4d8b8', foreB: '#c3ad80', hindA: '#ece1c4', hindB: '#ceb98c', edge: '#3d3527', spot: '#fbf5e4', glow: '#e5d6b4', glowScale: 0.42 },
+    { name: 'quiet-rose', foreA: '#e0cccc', foreB: '#b99396', hindA: '#e8d7d7', hindB: '#c4a0a3', edge: '#3e2f31', spot: '#faf0f0', glow: '#dfc9c9', glowScale: 0.42 },
+    { name: 'quiet-moss', foreA: '#cfd2b8', foreB: '#a0a383', hindA: '#dadcc6', hindB: '#afb293', edge: '#33352a', spot: '#f5f6ea', glow: '#cbd0b2', glowScale: 0.42 },
+    { name: 'quiet-slate', foreA: '#c3cbd2', foreB: '#8e9aa4', hindA: '#d0d8de', hindB: '#9faeb8', edge: '#2a3238', spot: '#f1f5f7', glow: '#c6d0d8', glowScale: 0.42 },
+];
+
+/** Fisher-Yates, so a small flock gets distinct colours without a fixed order. */
+export function shuffleSpecies(list: Species[] = QUIET_SPECIES): Species[] {
+    const out = list.slice();
+    for (let i = out.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [out[i], out[j]] = [out[j], out[i]];
+    }
+    return out;
+}
 
 const K = 1.6;
 const DW = 80;
@@ -101,10 +128,10 @@ export type Fly = {
     ang: number; radius: number; spin: number;
 };
 
-export function makeFly(x: number, y: number, size: number, index: number, seed: number): Fly {
+export function makeFly(x: number, y: number, size: number, index: number, seed: number, sp?: Species): Fly {
     return {
         x, y, vx: 0, vy: 0, heading: -Math.PI / 2, phase: seed * 6.28, size,
-        sp: SPECIES[index % SPECIES.length], seed, flap: 1, landed: false, restUntil: 0,
+        sp: sp ?? SPECIES[index % SPECIES.length], seed, flap: 1, landed: false, restUntil: 0,
         tx: x, ty: y, ang: seed * 6.28, radius: 34 + seed * 46, spin: (seed > 0.5 ? 1 : -1) * (0.5 + seed * 0.7),
     };
 }
@@ -199,7 +226,8 @@ function haloSprite(s: Species, night: boolean): HTMLCanvasElement {
     c.width = c.height = 64;
     const g = c.getContext('2d')!;
     const grad = g.createRadialGradient(32, 32, 3, 32, 32, 32);
-    grad.addColorStop(0, s.glow + (night ? 'aa' : '55'));
+    const glow = Math.round((night ? 170 : 85) * (s.glowScale ?? 1));
+    grad.addColorStop(0, s.glow + glow.toString(16).padStart(2, '0'));
     grad.addColorStop(1, s.glow + '00');
     g.fillStyle = grad;
     g.fillRect(0, 0, 64, 64);

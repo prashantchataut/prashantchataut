@@ -165,18 +165,6 @@
 .reveal-tag-now { right: 14px; }
 .reveal figcaption { margin-top: 12px; color: var(--muted); font-size: 13px; }
 
-.name-audio {
-  display: inline-flex; align-items: center; gap: 14px; margin: 8px 20px 22px 0; padding: 8px 20px 8px 8px; min-height: 52px;
-  border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); font: inherit; cursor: pointer;
-  text-align: left; transition: border-color 200ms ease-out, transform 150ms ease-out;
-}
-.name-audio:hover { border-color: var(--accent); }
-.name-audio:active { transform: scale(0.98); }
-.name-audio-icon { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--accent); color: var(--paper); }
-.name-audio-icon svg { fill: currentColor; }
-.name-audio-ne { display: block; font-family: var(--font-devanagari), sans-serif; font-size: 20px; line-height: 1.2; }
-.name-audio-ph { display: block; color: var(--muted); font-size: 13px; }
-
 .about-path { margin-top: 100px; }
 .about-path > h3 { font-size: clamp(30px, 4vw, 50px); line-height: 1.1; margin-bottom: 40px; }
 .path { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 28px; margin: 0; padding: 0; list-style: none; }
@@ -247,7 +235,7 @@
 .ft-bottom a:hover { color: var(--ink); }
 
 /* ---------- focus ---------- */
-.work-rail a:focus-visible, .name-audio:focus-visible, .share-bar button:focus-visible, .ft-copy:focus-visible,
+.work-rail a:focus-visible, .share-bar button:focus-visible, .ft-copy:focus-visible,
 .ft-links a:focus-visible, .ft-email:focus-visible, .ft-bottom a:focus-visible, .home-card:focus-visible, .next-piece:focus-visible {
   outline: 3px solid var(--accent); outline-offset: 3px; transition: none;
 }
