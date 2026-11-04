@@ -1,8 +1,13 @@
-import { ImageResponse } from 'next/og';
-export const runtime = 'edge';
-export const alt = 'Writing | Prashant Chataut';
-export const size = { width: 1200, height: 630 };
+import { siteCard, OG_SIZE } from '@/lib/og';
+
+export const alt = 'Writing by Prashant Chataut: a poem and a story.';
+export const size = OG_SIZE;
 export const contentType = 'image/png';
+
 export default function Image() {
-    return new ImageResponse(<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '100%', height: '100%', background: '#f8f8f3', color: '#172b35', padding: '68px 76px' }}><div style={{ fontSize: 25, fontWeight: 600 }}>Prashant Chataut</div><div style={{ display: 'flex', flexDirection: 'column' }}><div style={{ fontSize: 78 }}>Writing.</div><div style={{ fontSize: 26, marginTop: 28 }}>A poem and a story.</div></div><div style={{ fontSize: 20 }}>knowprashant.vercel.app/writes</div></div>, size);
+    return siteCard({
+        title: 'Writing.',
+        line: 'A poem and a story. Poems and notes on making things.',
+        url: 'knowprashant.vercel.app/writes',
+    });
 }

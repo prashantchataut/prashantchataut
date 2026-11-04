@@ -1,8 +1,13 @@
-import { ImageResponse } from 'next/og';
-export const runtime = 'edge';
-export const alt = 'Prashant Chataut | apps for learning, play, and reflection';
-export const size = { width: 1200, height: 630 };
+import { siteCard, OG_SIZE } from '@/lib/og';
+
+export const alt = 'Prashant Chataut, developer from Nepal. A name wrapped in flowers over a meadow with butterflies.';
+export const size = OG_SIZE;
 export const contentType = 'image/png';
+
 export default function Image() {
-    return new ImageResponse(<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '100%', height: '100%', background: '#b5d7e8', color: '#172b35', padding: '68px 76px' }}><div style={{ fontSize: 25, fontWeight: 600 }}>Prashant Chataut</div><div style={{ display: 'flex', flexDirection: 'column' }}><div style={{ fontSize: 72, lineHeight: 1.1, maxWidth: 1000 }}>Prashant Chataut</div><div style={{ fontSize: 26, marginTop: 28 }}>Apps, ideas, and writing.</div></div><div style={{ fontSize: 20 }}>knowprashant.vercel.app</div></div>, size);
+    return siteCard({
+        title: 'Prashant Chataut',
+        line: 'Developer from Nepal. I make apps to solve things that matter to me.',
+        url: 'knowprashant.vercel.app',
+    });
 }

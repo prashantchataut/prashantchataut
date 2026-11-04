@@ -16,6 +16,7 @@ type Options = {
     tip: HTMLElement;
     text: HTMLElement | null;
     days: Day[] | null;
+    onBlooms?: (blooms: { x: number; y: number; count: number }[]) => void;
 };
 type Plant = {
     x: number; base: number; row: number; sprite: Sprite; mirror: boolean;
@@ -178,7 +179,9 @@ export function startMeadow(o: Options) {
 
     function buildCritters() {
         const small = w < 260;
-        flies = Array.from({ length: small ? 1 : 2 }, (_, i) => ({ x: rand() * w, y: horizon + rand() * 10, vx: 0, vy: 0, tx: rand() * w, ty: horizon, rest: 0, plant: null, wing: (i % 2 ? 'wing2' : 'wing') as Key, phase: rand() * 6, gone: false }));
+        // butterflies are painted by the wings layer above this canvas
+        flies = [];
+        o.onBlooms?.(plants.map(p => ({ x: (p.x + 0.5) * P, y: p.top * P, count: p.count })));
         motes = Array.from({ length: small ? 6 : 11 }, () => spawnMote(true));
         fireflies = Array.from({ length: small ? 9 : 18 }, () => ({ x: rand() * w, y: horizon - 6 + rand() * (h - horizon), ax: rand() * 6.28, ay: rand() * 6.28, ph: rand() * 6.28, w: 0.8 + rand() * 1.6 }));
     }
