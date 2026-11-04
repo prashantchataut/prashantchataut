@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
-import { Sora, Libre_Baskerville, Noto_Sans_Devanagari } from 'next/font/google';
+import { Sora, Libre_Baskerville, Noto_Sans_Devanagari, Pixelify_Sans } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { CursorButterflies } from '@/components/garden/Butterflies';
+
+const pixelify = Pixelify_Sans({ subsets: ['latin'], variable: '--font-pixel', display: 'swap' });
 
 const sora = Sora({
     subsets: ['latin'],
@@ -109,7 +111,7 @@ export default function RootLayout({
     };
 
     return (
-        <html lang="en" suppressHydrationWarning className={`${sora.variable} ${libreBaskerville.variable} ${notoDevanagari.variable}`}>
+        <html lang="en" suppressHydrationWarning className={`${sora.variable} ${libreBaskerville.variable} ${notoDevanagari.variable} ${pixelify.variable}`}>
             <head>
                 <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem("theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}})()` }} />
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
